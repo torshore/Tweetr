@@ -7,15 +7,17 @@
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- App CSS -->
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
     <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/tweets.css" type="text/css"/>
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
-
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
   </head>
 
   <body>
@@ -24,12 +26,13 @@
     <nav id="nav-bar">
       <img class="logo" src="/images/bird.png">
       <span class="header">Tweeter</span>
+      <button class="compose">Compose</button>
     </nav>
 
     <!-- Page-specific (main) content here -->
     <main class="container">
 
-       <section class="new-tweet">
+      <section class="new-tweet">
 
         <h2>Compose Tweet</h2>
 
@@ -38,6 +41,36 @@
           <input type="submit" value="Tweet">
           <span class="counter">140</span>
         </form>
+
+      </section>
+
+      <!-- <div id="errors">
+          <span class="empty-error">Hey! Looks like you forgot your words!</span>
+
+          <span class="error">Hey! Looks like you used too many words!</span>
+      </div> -->
+
+      <section id="tweets-container">
+
+        <article class="tweets">
+
+         <header class="tweet-head">
+           <img class="avatar" src= "http://fillmurray.com/200/300">
+           <span class="username">Username</span>
+           <h5>@username</h5>
+         </header>
+
+         <p class="text">The text of the tweet goes here</p>
+
+         <footer>10 Days Ago
+           <div class="icons">
+             <i class="fa fa-heart"></i>
+             <i class="fa fa-retweet"></i>
+             <i class="fa fa-flag"></i>
+          </div>
+         </footer>
+
+        </article>
 
       </section>
 

@@ -1,0 +1,61 @@
+.tweets {
+  border: 2px solid #7b99ae;
+  border-radius: 15px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.tweets:hover {
+  border: 3px solid #7b99ae;
+}
+
+.tweets:hover .icons {
+  color: #00CED1;
+  visibility: visible;
+  padding: 5px;
+}
+
+.tweets .tweet-head{
+  background-color: #eee;
+  display: block;
+  height: 90px;
+}
+
+.tweet-head .avatar {
+  margin: 10px;
+  width: 60px;
+  height: 60px;
+  float: left;
+}
+
+.tweet-head .username {
+  font-size: 150%;
+  font-weight: bold;
+  line-height: 75px;
+}
+
+.tweets h5 {
+  float:right;
+  padding: 10px;
+}
+
+.text {
+  margin: 30px;
+}
+
+footer {
+  border-top: 2px solid #7b99ae;
+  padding: 5px;
+}
+
+#icons {
+  visibility: hidden;
+  float: right;
+}
+
+/*#icons:hover {
+  color: #00CED1;
+  visibility: visible;
+  padding: 5px;
+}*/
+
