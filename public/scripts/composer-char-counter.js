@@ -1,5 +1,5 @@
 $(document).ready(function($){
-  $("textarea").keydown(updateCountdown);
+  $("textarea").keyup(updateCountdown);
 });
 
 function updateCountdown () {
@@ -7,6 +7,5 @@ function updateCountdown () {
   $(this).siblings(".counter").text(remaining);
   if (remaining < 0) {
     $(".counter").css("color", "red");
-    alert("You seem very verbose! Please use fewer words!")
   }
 };

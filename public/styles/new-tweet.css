@@ -6,12 +6,12 @@
   display: none;
 }
 
-h2 {
+.new-tweet h2 {
 border-bottom: solid black;
 border-bottom-width: thin;
 }
 
-textarea {
+.new-tweet textarea {
   padding: 10px;
   width: 100%;
 }

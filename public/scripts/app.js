@@ -1,81 +1,77 @@
 const ROOT_URL = "http://localhost:8080";
 
-var data = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": {
-        "small":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png",
-        "regular": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
-        "large":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
-      },
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": {
-        "small":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png",
-        "regular": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png",
-        "large":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png"
-      },
-      "handle": "@rd" },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1461113959088
-  },
-  {
-    "user": {
-      "name": "Johann von Goethe",
-      "avatars": {
-        "small":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png",
-        "regular": "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png",
-        "large":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_200.png"
-      },
-      "handle": "@johann49"
-    },
-    "content": {
-      "text": "Es ist nichts schrecklicher als eine tätige Unwissenheit."
-    },
-    "created_at": 1461113796368
-  }
-];
-
 $(document).ready( () => {
+  //////// tweets
   loadTweets();
   $(".new-tweet form").on('submit', (ev) => {
     ev.preventDefault();
-    if (!$(".new-tweet textarea").val()) {
-     alert("You forgot your words");
+
+    let textData = $(".new-tweet form").find("textarea").val()
+    if (!textData.length) {
+     alert("You forgot your words!");
+     return;
+   } else if (textData.length > 140) {
+     alert("You seem very verbose! Please use fewer words!");
      return;
    }
-  // read the data from the form inputs
-  const data_obj = {};
-  $(".new-tweet form").serializeArray().forEach((elm) => {
-    data_obj[elm.name] = elm.value;
-  });
-  // // submit the info
+
   $.ajax({
     method: 'POST',
     url: `${ROOT_URL}/tweets`,
-    data: data_obj
+    data: {text: textData}
   })
   .done((new_post) => {
-    $(".new-tweet form").find("input[type=text], textarea").val('');
     loadTweets();
   })
-  })
+  });
+////////// users register
+  $(".register form").on("submit", ev =>{
+    ev.preventDefault();
+
+    let usernameData = $("#username").val();
+    let handleData   = $("#handle").val();
+    let passwordData = $("#password").val()
+
+    if (!usernameData.length && !handleData.length && !passwordData.length) {
+      console.log(usernameData.length)
+      alert("Please enter a valid username, handle and password!");
+      return;
+    } else {
+      $("#register").click( function() {
+        $(".register").slideUp();
+      $.ajax({
+        method: "POST",
+        url:`${ROOT_URL}/users`,
+        data: {username: usernameData,
+          handle: handleData,
+          password: passwordData}
+      })
+      .done((new_user) => {
+      })
+    })
+    };
+  });
+
   $(".compose").click(function() {
-    $(".new-tweet").slideDown().css("display", "block");
+    $(".new-tweet").slideToggle(600);
     $(".new-tweet textarea").focus();
   });
-  });
+  $(".reg-button").click(function(){
+    $(".register").slideToggle(600);
+  })
+  $(".log-button").click(function(){
+    $(".login").slideToggle(600);
+  })
+});
+
+const loadTweets = () => {
+  $.ajax({
+    method: 'GET',
+    url: `${ROOT_URL}/tweets`
+  })
+  .done(renderTweets)
+  .fail(console.error);
+};
 
 function renderTweets(tweets) {
   const $tweets = $("#tweets-container");
@@ -96,12 +92,12 @@ function createTweetElement(tweetObj) {
 
          <p class="text">${escape(tweetObj.content.text)}</p>
 
-         <footer>${tweetObj.created_at}
-           <div id="icons">
+         <footer class="tweet-foot">
+           <span class="tweet-age">${timeDifference(Date.now(),tweetObj.created_at)}</span>
+           <div class="icons">
              <i class="fa fa-heart"></i>
              <i class="fa fa-retweet"></i>
              <i class="fa fa-flag"></i>
-
           </div>
          </footer>
 
@@ -115,14 +111,36 @@ function escape(str) {
   return div.innerHTML;
 }
 
-const loadTweets = () => {
-  $.ajax({
-    method: 'GET',
-    url: `${ROOT_URL}/tweets`
-  })
-  .done(renderTweets)
-  .fail(console.error);
-};
+function timeDifference(current, previous) {
+ let msPerMinute = 60 * 1000;
+ let msPerHour = msPerMinute * 60;
+ let msPerDay = msPerHour * 24;
+ let msPerMonth = msPerDay * 30;
+ let msPerYear = msPerDay * 365;
+ let elapsed = current - previous;
+ if (elapsed < msPerMinute) {
+     return Math.round(elapsed/1000) + ' seconds ago';
+ }
+ else if (elapsed < msPerHour) {
+     return Math.round(elapsed/msPerMinute) + ' minutes ago';
+ }
+ else if (elapsed < msPerDay ) {
+     return Math.round(elapsed/msPerHour ) + ' hours ago';
+ }
+ else if (elapsed < msPerMonth) {
+    return 'approximately ' + Math.round(elapsed/msPerDay) + ' days ago';
+ }
+ else if (elapsed < msPerYear) {
+    return 'approximately ' + Math.round(elapsed/msPerMonth) + ' months ago';
+ }
+ else {
+    return 'approximately ' + Math.round(elapsed/msPerYear ) + ' years ago';
+ }
+}
+
+
+
+
 
 
 

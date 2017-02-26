@@ -6,13 +6,14 @@
 
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,700" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- App CSS -->
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
     <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css" />
     <link rel="stylesheet" href="/styles/tweets.css" type="text/css"/>
+     <link rel="stylesheet" href="/styles/login-register.css" type="text/css"/>
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
     <!-- App JS -->
@@ -24,13 +25,30 @@
 
     <!-- Top nav bar (fixed) -->
     <nav id="nav-bar">
-      <img class="logo" src="/images/bird.png">
+
+      <img class="logo" src="/images/peacockfeatherpng.png">
       <span class="header">Tweeter</span>
-      <button class="compose">Compose</button>
+      <button class="compose"><strong>Compose</strong></button>
+      <button class="reg-button"><strong>Register</strong></button>
+
+
     </nav>
 
-    <!-- Page-specific (main) content here -->
     <main class="container">
+
+      <section class="reg-log">
+        <div class="register">
+
+          <h2>Register</h2>
+
+          <form method="POST" action="/register">
+            <input id="username" type="text" name="username" placeholder="Username">
+            <input  id="handle" type="text" name="handle" placeholder="@ Handle">
+            <input id="password" type="password" name="password" placeholder="Password">
+            <input id="register" type="submit" value="Register">
+          </form>
+
+        </div>
 
       <section class="new-tweet">
 
@@ -44,12 +62,6 @@
 
       </section>
 
-      <!-- <div id="errors">
-          <span class="empty-error">Hey! Looks like you forgot your words!</span>
-
-          <span class="error">Hey! Looks like you used too many words!</span>
-      </div> -->
-
       <section id="tweets-container">
 
         <article class="tweets">
@@ -62,7 +74,8 @@
 
          <p class="text">The text of the tweet goes here</p>
 
-         <footer>10 Days Ago
+         <footer class="tweet-foot">
+           <span class="tweet-age">10 Days Ago</span>
            <div class="icons">
              <i class="fa fa-heart"></i>
              <i class="fa fa-retweet"></i>
