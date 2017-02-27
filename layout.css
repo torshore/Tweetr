@@ -23,7 +23,7 @@ main {
   position: relative;
   top: 80px; }
 
-.reg-button {
+.reg-button, #nav-bar .compose {
   float: right;
   width: 100px;
   height: 60px;
@@ -67,15 +67,6 @@ main {
   float: left;
   font-size: 200%;
   line-height: 75px; }
-
-#nav-bar .compose {
-  float: right;
-  width: 100px;
-  height: 60px;
-  margin-top: 10px;
-  border-radius: 15px;
-  background-color: #eee;
-  color: #36384C; }
 
 #nav-bar .compose:hover {
   color: black;
@@ -147,4 +138,4 @@ main {
   display: none;
   float: right; }
 
-/*# sourceMappingURL=layoout.css.map */
+/*# sourceMappingURL=layout.css.map */
